@@ -1,0 +1,117 @@
+from turtle import *
+
+/**
+	所有运动路线就是运动轨迹
+	角度值: 其中，0表示向东，90度向北，180度向西，270度向南；负值表示相反方向。
+	left(-90) == right(90)
+	画笔颜色==轨迹颜色
+	画笔粗细==轨迹粗细
+	**/
+#screensize(canvwidth=画布的宽, canvheight=画布的高, bg="背景颜色")
+	正整形参数
+setup(width=0.5,height=0.75,startx=None,starty=None)
+	width，如果是整形参数表示画布的宽具体为多少像素
+			如果是浮点数，表示画布占用屏幕的具体百分比
+	height, 如果是整形参数表示画布的高具体为多少像素
+			如果是浮点数，表示画布占用屏幕的具体百分比
+	startx, 如果是正值, 表示窗口初始位置距离左边缘多少像素, 负值表示距离右边缘多少像素
+		NONE 表示水平居中
+	starty, 如果是正值, 表示窗口初始位置距离上边缘多少像素, 负值表示距离下边缘多少像素
+		NONE 表示垂直居中
+forwarwd # forward(150)  # 向当前面朝方向画一条指定长度的线段,默认初始起始位置为x0,y0,方向为x
+	backward() # 向当前画笔的反方向移动指定像素长度，并留下一道线段
+left()  # 箭头（面朝方向）向左旋转指定度数
+right() # 箭头（面朝方向）向右旋转指定度数
+setheading() # 将箭头朝向旋转到指定度数
+speed()  画线和海龟转向的速度
+	"fastest": 0 最快
+	"fast": 10 快
+	"normal": 6 正常
+	"slow": 3 慢
+	"slowest": 1 最慢
+goto(x, y) 将画笔(小乌龟)移动到指定的坐标x, y ,移动画笔会留下运动轨迹，此时pensize(), pencolor()方法就可以对运动轨迹进行操作
+	pensize() 表示小乌龟运动轨迹（goto()移动就叫运动轨迹）的跨度(线条宽度)
+		画笔的粗细
+	pencolor	表示小乌龟运动轨迹（goto()移动就叫运动轨迹）的颜色
+		画笔的颜色
+setx()
+	将当前画笔(小乌龟)位置移动到指定的X轴坐标, 移动会产生运动轨迹
+sety()
+	将当前画笔(小乌龟)位置移动到指定得Y轴坐标, 移动会产生运动轨迹
+home() 返回原点, x0,y0 朝向东X
+	不是直接复原到原点, 而是移动回原点, 并且会留下运动轨迹
+circle(radius, extent=None, steps=None) 画一个指定半径的圆
+	radius:
+		正数,箭头指向, 从左到右
+		负数,箭头指向, 从右到左
+	extent:
+		未指定 extent*则绘制整个圆
+		如果 *extent 不是完整圆周，则以当前画笔位置为一个端点绘制圆弧
+			完整圆周为360
+			如果不是完整圆周, 则以当前画笔位置为一个端点绘制圆弧, 在设置的extend值处停止
+				在圆中心绘制x,y周,即可看出起始位置与extend的关系
+	steps:
+		正值或NOne
+			步长为几, 便绘制一个几边形
+		做半径为radius的圆的内切正多边形，多边形边数为steps
+undo() 撤销上一步操作
+clear() 清空
+dot(size=#, color=#) 绘制一个指定直径的圆, 并设置颜色
+pendown() 落下画笔, 移动时将画线
+penup()  抬起画笔, 移动时不画线
+
+pen()  画笔
+	示例:pen(pensize(10), pencolor("green"), goto(-190, -180), dot(90, "blue"), done())
+	画笔, 可以设置属性
+	返回或设置画笔的属性，以一个包含以下键值对的 "画笔字典" 表示:
+	"shown": True/False
+	"pendown": True/False
+	"pencolor": 颜色字符串或颜色元组
+	"fillcolor": 颜色字符串或颜色元组
+	"pensize": 正数值
+	"speed": 0..10 范围内的数值
+	"resizemode": "auto" 或 "user" 或 "noresize"
+	"stretchfactor": (正数值, 正数值)
+	"outline": 正数值
+	"tilt": 数值
+isdown:
+	判断当前画笔是否落下, 落下返回True, 抬起返回False
+color(画笔轮廓颜色, 画笔填充颜色)
+fillcolor(颜色):
+	画笔填充颜色
+filling():
+	返回当前是否是填充状态True/Flase
+begin_fill()
+	开启填充
+	绘制图形
+end_fill()
+	结束填充, 会给此期间绘制的图形填充颜色
+write(arg, move=False, align='left', font='Arial', 8, 'normal')  书写:
+	arg: 要书写的对象
+	move: 默认为False, 改为True, 画笔位置会移动至文本右下角
+	align: left, center, right
+		left: 画笔从字体左边经过
+		center: 画笔从字体中间经过
+		right: 画笔从字体右边经过
+	font: 这是一个三元祖
+		one: 字体名称   fontname
+		two: 字体大小   fontsize
+		three: 字体类型 fonttype
+shape:
+	这是外观形象
+		有效形象:
+			"arrow": "箭头", "turtle": "乌龟", 
+			"circle": "圆形", "square": "正方形", 
+			"triangle": "三角形", "classic": "经典默认四边箭头"
+showturtle():
+	显示turtle外观
+	默认以经典四边箭头形状显示
+hideturtle():
+	隐藏turtle外观
+isvisible():
+	如果乌龟显示返回True
+	如果乌龟不显示返回False
+done():
+	运行结束但不退出, 必须作为一个海龟绘图程序的结束语句
+delay():
+	返回或设置延迟时间
